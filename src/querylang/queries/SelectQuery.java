@@ -2,10 +2,10 @@ package querylang.queries;
 
 import querylang.db.Database;
 import querylang.db.User;
-import querylang.result.QueryResult;
 import querylang.result.SelectQueryResult;
 import querylang.util.FieldGetter;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
@@ -27,7 +27,27 @@ public class SelectQuery implements Query {
 
     @Override
     public SelectQueryResult execute(Database database) {
-        // TODO: Реализовать выбор
-        return null;
+        List<User> users = new ArrayList<>(database.getAll());
+
+        if (predicate != null) {
+            users.removeIf(user -> !predicate.test(user));
+        }
+
+        if (comparator != null) {
+            users.sort(comparator);
+        } else {
+            users.sort(Comparator.comparingInt(User::id));
+        }
+
+        List<List<String>> result = new ArrayList<>();
+        for (User user : users) {
+            List<String> row = new ArrayList<>();
+            for (FieldGetter getter : getters) {
+                row.add(getter.getFieldValue(user));
+            }
+            result.add(row);
+        }
+
+        return new SelectQueryResult(result);
     }
 }

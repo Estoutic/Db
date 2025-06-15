@@ -12,7 +12,7 @@ public class RemoveQuery implements Query {
 
     @Override
     public RemoveQueryResult execute(Database database) {
-        // TODO: Реализовать удаление
-        return null;
+        boolean removed = database.remove(id);
+        return new RemoveQueryResult(id, removed);
     }
 }

@@ -9,7 +9,6 @@ public class InsertQueryResult implements QueryResult {
 
     @Override
     public String message() {
-        // TODO: Реализовать вставку
-        return null;
+        return "User with id " + id + " was added successfully";
     }
 }

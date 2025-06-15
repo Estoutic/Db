@@ -11,7 +11,6 @@ public class RemoveQueryResult implements QueryResult {
 
     @Override
     public String message() {
-        // TODO: Реализовать удаление
-        return null;
+        return success ? "User with id " + id + " was removed successfully" : "User with id " + id + " doesn't exist";
     }
 }

@@ -14,7 +14,7 @@ public class InsertQuery implements Query {
 
     @Override
     public InsertQueryResult execute(Database database) {
-        // TODO: Реализовать вставку
-        return null;
+        int newId = database.add(user);
+        return new InsertQueryResult(newId);
     }
 }
