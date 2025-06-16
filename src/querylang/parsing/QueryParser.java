@@ -36,24 +36,25 @@ public class QueryParser {
         if (!arguments.startsWith("(") || !arguments.endsWith(")")) {
             return ParsingResult.error("Invalid INSERT syntax");
         }
+
         String content = arguments.substring(1, arguments.length() - 1);
-        String[] fields = content.split(",", 4);
+        String[] fields = content.split(",");
+
         if (fields.length != 4) {
             return ParsingResult.error("INSERT requires exactly 4 parameters");
         }
 
-        String firstName = fields[0].trim();
-        String lastName = fields[1].trim();
-        String city = fields[2].trim();
-        String ageStr = fields[3].trim();
+        for (int i = 0; i < fields.length; i++) {
+            fields[i] = fields[i].trim();
+        }
 
-        if (firstName.isEmpty() || lastName.isEmpty() || city.isEmpty()) {
+        if (fields[0].isEmpty() || fields[1].isEmpty() || fields[2].isEmpty()) {
             return ParsingResult.error("String values cannot be empty");
         }
 
         int age;
         try {
-            age = Integer.parseInt(ageStr);
+            age = Integer.parseInt(fields[3]);
             if (age < 0) {
                 return ParsingResult.error("Age must be non-negative");
             }
@@ -61,7 +62,7 @@ public class QueryParser {
             return ParsingResult.error("Age must be a valid integer");
         }
 
-        User user = new User(0, firstName, lastName, city, age);
+        User user = new User(0, fields[0], fields[1], fields[2], age);
         return ParsingResult.of(new InsertQuery(user));
     }
 
