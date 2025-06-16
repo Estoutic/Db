@@ -1,5 +1,6 @@
 package querylang.result;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SelectQueryResult implements QueryResult {
@@ -11,19 +12,13 @@ public class SelectQueryResult implements QueryResult {
 
     @Override
     public String message() {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < selectedValues.size(); i++) {
-            List<String> row = selectedValues.get(i);
-            for (int j = 0; j < row.size(); j++) {
-                sb.append(row.get(j));
-                if (j < row.size() - 1) {
-                    sb.append(", ");
-                }
-            }
-            if (i < selectedValues.size() - 1) {
-                sb.append("\n");
-            }
+        List<String> lines = new ArrayList<>();
+
+        for (List<String> row : selectedValues) {
+            String line = String.join(", ", row);
+            lines.add(line);
         }
-        return sb.toString();
+
+        return String.join("\n", lines);
     }
 }

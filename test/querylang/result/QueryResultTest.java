@@ -20,7 +20,7 @@ class QueryResultTest {
         assertEquals("User with id 1 was removed successfully", removeSuccess.message());
 
         RemoveQueryResult removeFail = new RemoveQueryResult(999, false);
-        assertEquals("User with id 999 doesn't exist", removeFail.message());
+        assertEquals("User with id 999 does not exist", removeFail.message());
 
         List<List<String>> data = Arrays.asList(
                 Arrays.asList("Sasha", "28"),

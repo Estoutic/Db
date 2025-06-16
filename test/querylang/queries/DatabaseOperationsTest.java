@@ -11,7 +11,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DatabaseOperationsTest {
+class DatabaseOperъationsTest {
     private Database database;
 
     @BeforeEach
@@ -55,7 +55,7 @@ class DatabaseOperationsTest {
         RemoveQuery removeQuery2 = new RemoveQuery(999);
         var result2 = removeQuery2.execute(database);
 
-        assertEquals("User with id 999 doesn't exist", result2.message());
+        assertEquals("User with id 999 does not exist", result2.message());
     }
 
     @Test

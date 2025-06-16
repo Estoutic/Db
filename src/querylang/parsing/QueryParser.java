@@ -27,7 +27,7 @@ public class QueryParser {
 
     private ParsingResult<Query> parseClear(String arguments) {
         if (!arguments.isEmpty()) {
-            return ParsingResult.error("'CLEAR' doesn't accept arguments");
+            return ParsingResult.error("'CLEAR' does not accept arguments");
         }
         return ParsingResult.of(new ClearQuery());
     }
